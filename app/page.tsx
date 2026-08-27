@@ -16,7 +16,7 @@ import { projects } from "@/lib/projects";
 
 const profile = {
   name: "Gavin Fernando",
-  title: "Web-App Developer | Cybersecurity MSc | HCI inspired",
+  //title: "Web-App Developer | Cybersecurity MSc | HCI inspired",
   pitch:
     "I build clean, usable interfaces — with a security-aware mindset from my cybersecurity background.",
   bio: "A versatile Web-App, UI Designer skilled in building secure platforms with an interest of HCI. Currently enrolled as a Cybersecurity Masters student at Universität des Saarlandes",
@@ -44,23 +44,12 @@ export default function Home() {
 
         <div>
           <h1 className="text-3xl font-bold">{profile.name}</h1>
-          <p className="text-muted-foreground">{profile.title}</p>
+          {/*<p className="text-muted-foreground">{profile.title}</p>*/}
         </div>
 
         <p className="max-w-xl text-lg">{profile.pitch}</p>
 
-        <div className="flex flex-wrap justify-center gap-2">
-          {profile.skills.map((skill) => (
-            <Badge key={skill} variant="secondary">
-              {skill}
-            </Badge>
-          ))}
-        </div>
-
         <div className="flex gap-3 pt-2">
-          <Button className="hover:!bg-red-600 hover:!text-white hover:!border-red-600" asChild>
-            <a href={`mailto:${profile.email}`}>Contact Me</a>
-          </Button>
           <Button variant="outline" className="hover:!bg-green-600 hover:!text-white hover:!border-green-600" asChild>
             <a href={profile.github} target="_blank" rel="noopener noreferrer">
               GitHub
@@ -72,6 +61,22 @@ export default function Home() {
             </a>
           </Button>
         </div>
+
+      </section>
+
+      <Separator />
+
+      {/* About */}
+      <section className="space-y-3">
+        <h2 className="text-2xl font-semibold">My Developer skills</h2>
+        <div className="flex flex-wrap justify-left gap-2">
+          {profile.skills.map((skill) => (
+            <Badge key={skill} variant="secondary">
+              {skill}
+            </Badge>
+          ))}
+        </div>
+        
       </section>
 
       <Separator />
@@ -82,7 +87,7 @@ export default function Home() {
         <p className="text-muted-foreground leading-relaxed">{profile.bio}</p>
       </section>
 
-      <Separator />
+      <Separator/>
 
       {/* Projects */}
       <section className="space-y-6">
@@ -118,6 +123,9 @@ export default function Home() {
       <section className="space-y-3">
         <h2 className="text-2xl font-semibold">Curious to know how I can cater your tech?</h2>
         <p className="text-muted-foreground leading-relaxed">{content.para1}</p>
+        <Button className="hover:!bg-red-600 hover:!text-white hover:!border-red-600" asChild>
+            <a href={`mailto:${profile.email}`}>Contact Me</a>
+          </Button>
       </section>
     </main>
   );
