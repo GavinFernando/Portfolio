@@ -48,7 +48,7 @@ export const projects: Project[] = [
       "/projects/beat-crusher/performance3.jpg",
       "/projects/beat-crusher/backwiring.jpg",
       "/projects/beat-crusher/prototype1.jpg",
-
+      //fixed format issue
     ],
     videos: [
         "/projects/beat-crusher/prototype1.mp4",
