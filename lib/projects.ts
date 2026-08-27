@@ -44,8 +44,8 @@ export const projects: Project[] = [
     externalLinkLabel: "View on GitHub",
     images: [
       "/projects/beat-crusher/performance.jpg",
-      "/projects/beat-crusher/performance2.jpg",
-      "/projects/beat-crusher/performance3.jpg",
+      "/projects/beat-crusher/performance_2.jpg",
+      "/projects/beat-crusher/performance_3.jpg",
       "/projects/beat-crusher/backwiring.jpg",
       "/projects/beat-crusher/prototype1.jpg",
       //fixed format issue
