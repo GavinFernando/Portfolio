@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -31,10 +32,18 @@ function RichText({ text }: { text: string }) {
 
         if (isList) {
           return (
-            <ul key={i} className="list-disc space-y-2 pl-5 text-muted-foreground">
+            <ul key={i} className="space-y-2 text-muted-foreground">
               {lines.map((l, j) => (
-                <li key={j} className="leading-relaxed">
-                  {l.trimStart().slice(2)}
+                <li
+                  key={j}
+                  className="rise flex gap-3 leading-relaxed"
+                  style={{ animationDelay: `${0.05 * j}s` }}
+                >
+                  <span
+                    aria-hidden
+                    className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--accent-2)]"
+                  />
+                  <span>{l.trimStart().slice(2)}</span>
                 </li>
               ))}
             </ul>
@@ -68,35 +77,63 @@ export default async function ProjectPage({
   );
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16 space-y-12">
+    <main className="relative mx-auto max-w-3xl px-6 py-16 space-y-12">
+      {/* Ambient background wash */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      >
+        <div className="aurora absolute -top-48 -right-32 h-[24rem] w-[24rem] rounded-full opacity-[0.09] dark:opacity-[0.16]" />
+      </div>
+
       <Link
         href="/"
-        className="text-sm text-muted-foreground hover:underline underline-offset-4"
+        className="rise group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
-        ← Back to home
+        <ArrowLeft className="size-3.5 transition-transform duration-300 group-hover:-translate-x-1" />
+        <span className="link-sweep">Back to home</span>
       </Link>
 
       <section className="space-y-4">
-        <h1 className="text-3xl font-bold">{project.title}</h1>
+        <h1 className="rise stagger-1 gradient-text text-4xl font-bold tracking-tight">
+          {project.title}
+        </h1>
 
         {project.subtitle && (
-          <p className="text-sm text-muted-foreground">{project.subtitle}</p>
+          <p className="rise stagger-2 text-sm text-muted-foreground">
+            {project.subtitle}
+          </p>
         )}
 
         <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <Badge key={tag} variant="outline">
+          {project.tags.map((tag, i) => (
+            <Badge
+              key={tag}
+              variant="outline"
+              className="pop cursor-default transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-2)] hover:text-[var(--accent-2)]"
+              style={{ animationDelay: `${0.18 + i * 0.045}s` }}
+            >
               {tag}
             </Badge>
           ))}
         </div>
 
-        <RichText text={project.longDescription ?? project.description} />
+        <div className="rise stagger-3">
+          <RichText text={project.longDescription ?? project.description} />
+        </div>
 
         {project.externalLink && (
-          <Button asChild>
-            <a href={project.externalLink} target="_blank" rel="noopener noreferrer">
+          <Button
+            className="sheen-sweep group rise stagger-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20"
+            asChild
+          >
+            <a
+              href={project.externalLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {project.externalLinkLabel ?? "View Project"}
+              <ArrowUpRight className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </Button>
         )}
@@ -108,7 +145,10 @@ export default async function ProjectPage({
           {project.sections.map((sec) => (
             <section key={sec.heading} className="space-y-3">
               <Separator />
-              <h2 className="text-xl font-semibold">{sec.heading}</h2>
+              <div className="space-y-2 pt-3">
+                <span aria-hidden className="accent-bar" />
+                <h2 className="text-xl font-semibold">{sec.heading}</h2>
+              </div>
               <RichText text={sec.body} />
             </section>
           ))}
@@ -120,7 +160,10 @@ export default async function ProjectPage({
         <>
           <Separator />
           <section className="space-y-3">
-            <h2 className="text-xl font-semibold">Demo</h2>
+            <div className="space-y-2">
+              <span aria-hidden className="accent-bar" />
+              <h2 className="text-xl font-semibold">Demo</h2>
+            </div>
             <div
               className={cn(
                 "grid gap-4",
@@ -132,13 +175,13 @@ export default async function ProjectPage({
                   <video
                     key={video}
                     controls
-                    className="w-full rounded-lg border"
+                    className="w-full rounded-lg border transition-shadow duration-300 hover:shadow-xl hover:shadow-foreground/10"
                     src={video}
                   />
                 ) : (
                   <div
                     key={video}
-                    className="aspect-video w-full overflow-hidden rounded-lg border"
+                    className="aspect-video w-full overflow-hidden rounded-lg border transition-shadow duration-300 hover:shadow-xl hover:shadow-foreground/10"
                   >
                     <iframe
                       src={video}
@@ -159,14 +202,21 @@ export default async function ProjectPage({
         <>
           <Separator />
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">Gallery</h2>
+            <div className="space-y-2">
+              <span aria-hidden className="accent-bar" />
+              <h2 className="text-xl font-semibold">Gallery</h2>
+            </div>
             <div className="grid gap-6 sm:grid-cols-2">
               {images.map((img, i) => (
                 <figure
                   key={img.src}
-                  className={cn("space-y-2", img.wide && "sm:col-span-2")}
+                  className={cn(
+                    "pop group/img space-y-2",
+                    img.wide && "sm:col-span-2"
+                  )}
+                  style={{ animationDelay: `${Math.min(i, 8) * 0.07}s` }}
                 >
-                  <div className="overflow-hidden rounded-xl bg-muted ring-1 ring-foreground/10">
+                  <div className="overflow-hidden rounded-xl bg-muted ring-1 ring-foreground/10 transition-all duration-300 group-hover/img:-translate-y-1 group-hover/img:shadow-xl group-hover/img:shadow-foreground/10 group-hover/img:ring-[var(--accent-2)]/40">
                     {img.width && img.height ? (
                       <Image
                         src={img.src}
@@ -174,7 +224,7 @@ export default async function ProjectPage({
                         width={img.width}
                         height={img.height}
                         sizes="(max-width: 768px) 100vw, 768px"
-                        className="h-auto w-full"
+                        className="h-auto w-full transition-transform duration-500 ease-out group-hover/img:scale-[1.03]"
                       />
                     ) : (
                       <div className="relative aspect-video w-full">
@@ -186,13 +236,13 @@ export default async function ProjectPage({
                           }
                           fill
                           sizes="(max-width: 768px) 100vw, 50vw"
-                          className="object-cover"
+                          className="object-cover transition-transform duration-500 ease-out group-hover/img:scale-[1.03]"
                         />
                       </div>
                     )}
                   </div>
                   {img.caption && (
-                    <figcaption className="text-xs text-muted-foreground">
+                    <figcaption className="text-xs text-muted-foreground transition-colors duration-300 group-hover/img:text-foreground">
                       {img.caption}
                     </figcaption>
                   )}
