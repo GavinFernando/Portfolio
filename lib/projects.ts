@@ -35,7 +35,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "playerschain",
-    title: "PlayersChain 🎸",
+    title: "PlayersChain",
     subtitle:
       "BEng Software Engineering dissertation - IIT / University of Westminster - 2024",
     description:
@@ -152,7 +152,7 @@ export const projects: Project[] = [
   },
   {
     slug: "jingle-go",
-    title: "Jingle Go🔔",
+    title: "Jingle Go",
     description: "A Low Fi concept of an AR app to navigate Christmas Markets",
     longDescription:
       "JinglGO is an augmented reality (AR) based prototype designed to help people, both locals and tourists, navigate the Christmas Markets. It will provide real-time crowd updates, navigation features and intuitive and descriptive information about the market events, activities, stalls, and facilities all integrated within one seamless interface so that users can focus on having a good time instead of being overwhelmed",
@@ -168,7 +168,7 @@ export const projects: Project[] = [
   },
   {
     slug: "beat-crusher",
-    title: "Beat Crusher🥁",
+    title: "Beat Crusher",
     description:
       "A percussion instrument that uses drum pads to expressively control a drum synthesizer.",
     longDescription:
