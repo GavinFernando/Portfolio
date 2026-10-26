@@ -1,5 +1,6 @@
 // src/app/page.tsx
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -32,6 +33,57 @@ const profile = {
 const content = {
   para1: "Lets get in touch!",
 };
+
+type ExtracurricularLink = {
+  label: string;
+  href: string;
+};
+
+type ExtracurricularItem = {
+  title: string;
+  description: string;
+  links: ExtracurricularLink[];
+  image?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+};
+
+const extracurriculars: ExtracurricularItem[] = [
+  {
+    title: "Content Designing",
+    description:
+      "Using Canva to create personal designs and content for commercial use.",
+    links: [
+      { label: "Personal work", href: "https://canva.link/a2tedep2ih2ddhs" },
+      { label: "Commercial work", href: "https://canva.link/jbf6tkfr9akmtn3" },
+      { label: "Commercial work", href: "https://canva.link/443s46yzfld1s4x" },
+    ],
+  },
+  {
+    title: "Music",
+    description: "Public music profile on Instagram.",
+    links: [
+      { label: "@wherehesing", href: "https://www.instagram.com/wherehesing/?hl=en" },
+    ],
+  },
+  {
+    title: "Social Skills",
+    description:
+      "Very good with group coordination, making new friends, and working well within a team. Volunteered as part of the student crew for Mensch und Computer 2026 in Duisburg.",
+    links: [
+      { label: "LinkedIn post", href: "https://lnkd.in/p/eeMvQ5U8" },
+    ],
+    image: {
+      src: "/extracurricular/mensch-und-computer.jpeg",
+      alt: "Student volunteer group photo at Mensch und Computer 2026, Duisburg",
+      width: 1280,
+      height: 720,
+    },
+  },
+];
 
 export default function Home() {
   return (
@@ -165,6 +217,59 @@ export default function Home() {
                 </CardContent>
               </Card>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Other skills & extracurricular activities */}
+      <section className="rise stagger-6 space-y-6">
+        <div className="space-y-2">
+          <span aria-hidden className="accent-bar" />
+          <h2 className="text-2xl font-semibold">
+            Other Skills &amp; Extracurricular Activities
+          </h2>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2">
+          {extracurriculars.map((item, i) => (
+            <Card
+              key={item.title}
+              className="pop glow-card h-full"
+              style={{ animationDelay: `${0.45 + i * 0.09}s` }}
+            >
+              {item.image && (
+                <div className="relative mx-6 mt-6 overflow-hidden rounded-lg">
+                  <Image
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    width={item.image.width}
+                    height={item.image.height}
+                    className="h-auto w-full object-cover"
+                  />
+                </div>
+              )}
+              <CardHeader>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDescription>{item.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {item.links.map((link, j) => (
+                  <Button
+                    key={`${link.href}-${j}`}
+                    variant="outline"
+                    size="sm"
+                    className="transition-all duration-300 hover:-translate-y-0.5 hover:!bg-[var(--accent-2)] hover:!text-white"
+                    asChild
+                  >
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                      <ArrowUpRight className="size-3.5" />
+                    </a>
+                  </Button>
+                ))}
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
