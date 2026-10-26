@@ -19,7 +19,7 @@ function ThemeToggle() {
       variant="outline"
       size="icon"
       aria-label="Toggle dark mode"
-      className="fixed top-2 right-4 z-50 size-12 rounded-full backdrop-blur-sm"
+      className="fixed top-1 right-3 z-50 size-12 rounded-full backdrop-blur-sm sm:top-2 sm:right-4"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
       {mounted && resolvedTheme === "dark" ? (
