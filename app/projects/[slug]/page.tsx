@@ -32,7 +32,7 @@ function RichText({ text }: { text: string }) {
 
         if (isList) {
           return (
-            <ul key={i} className="space-y-2 text-muted-foreground">
+            <ul key={i} className="space-y-2 text-base text-muted-foreground lg:text-lg">
               {lines.map((l, j) => (
                 <li
                   key={j}
@@ -51,7 +51,7 @@ function RichText({ text }: { text: string }) {
         }
 
         return (
-          <p key={i} className="leading-relaxed text-muted-foreground">
+          <p key={i} className="text-base leading-relaxed text-muted-foreground lg:text-lg">
             {lines.join(" ")}
           </p>
         );
@@ -77,15 +77,7 @@ export default async function ProjectPage({
   );
 
   return (
-    <main className="relative mx-auto max-w-3xl px-6 py-16 space-y-12">
-      {/* Ambient background wash */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-      >
-        <div className="aurora absolute -top-48 -right-32 h-[24rem] w-[24rem] rounded-full opacity-[0.09] dark:opacity-[0.16]" />
-      </div>
-
+    <main className="relative mx-auto max-w-3xl px-6 py-16 space-y-12 lg:max-w-5xl lg:px-10 lg:py-24 lg:space-y-16 xl:max-w-6xl">
       <Link
         href="/"
         className="rise group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -95,12 +87,12 @@ export default async function ProjectPage({
       </Link>
 
       <section className="space-y-4">
-        <h1 className="rise stagger-1 gradient-text text-4xl font-bold tracking-tight">
+        <h1 className="rise stagger-1 gradient-text text-4xl font-bold tracking-tight lg:text-5xl">
           {project.title}
         </h1>
 
         {project.subtitle && (
-          <p className="rise stagger-2 text-sm text-muted-foreground">
+          <p className="rise stagger-2 text-base text-muted-foreground">
             {project.subtitle}
           </p>
         )}

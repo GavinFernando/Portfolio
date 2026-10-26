@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Mail } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -22,7 +21,7 @@ const profile = {
   pitch:
     "I build clean, usable interfaces — with a security-aware mindset from my cybersecurity background.",
   bio: "A versatile Web-App, UI Designer skilled in building secure platforms with an interest of HCI. Currently enrolled as a Cybersecurity Masters student at Universität des Saarlandes",
-  avatarUrl: "profile_pic.png",
+  avatarUrl: "/profile_pic.png",
   initials: "GF",
   skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Figma", "Python", "SQL", "Canva"],
   email: "gavinfernando172001@gmail.com",
@@ -87,72 +86,82 @@ const extracurriculars: ExtracurricularItem[] = [
 
 export default function Home() {
   return (
-    <main className="relative mx-auto max-w-3xl px-6 py-16 space-y-16">
-      {/* Ambient background wash */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-      >
-        <div className="aurora absolute -top-40 -left-40 h-[26rem] w-[26rem] rounded-full opacity-[0.10] dark:opacity-[0.18]" />
-        <div
-          className="aurora absolute top-1/2 -right-48 h-[22rem] w-[22rem] rounded-full opacity-[0.08] dark:opacity-[0.15]"
-          style={{ animationDelay: "-6s" }}
+    <>
+      {/* Full-bleed photo hero */}
+      <section className="relative isolate flex min-h-[88vh] w-full flex-col justify-end overflow-hidden bg-black sm:min-h-screen">
+        <Image
+          src={profile.avatarUrl}
+          alt={profile.name}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_30%] grayscale"
         />
-      </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/65 via-40% to-black/10"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent"
+        />
+        {/* Top nav */}
+        <nav className="rise absolute inset-x-0 top-0 z-10 hidden w-full items-center justify-center bg-black/85 backdrop-blur-sm sm:flex">
+          <div className="flex items-center gap-8 px-4 py-4">
+            {[
+              { label: "Skills", href: "#skills" },
+              { label: "Projects", href: "#projects" },
+              { label: "Who am I", href: "#whoami" },
+              { label: "Contact", href: "#contact" },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="rounded-full px-3 py-1.5 text-sm font-bold text-white/80 transition-colors hover:bg-white/15 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
 
-      {/* Hero / About */}
-      <section className="flex flex-col items-center text-center gap-4">
-        <div className="relative rise">
-          <div
-            aria-hidden
-            className="aurora pointer-events-none absolute -inset-5 rounded-full opacity-40 dark:opacity-60"
-          />
-          <Avatar className="bobbing relative h-72 w-50 ring-2 ring-background">
-            <AvatarImage src={profile.avatarUrl} alt={profile.name} />
-            <AvatarFallback>{profile.initials}</AvatarFallback>
-          </Avatar>
-        </div>
-
-        <div className="rise stagger-1">
-          <h1 className="gradient-text text-4xl font-bold tracking-tight sm:text-5xl">
+        {/* Name + pitch */}
+        <div className="rise stagger-2 relative z-10 px-6 pb-14 text-center sm:px-10 sm:pb-20">
+          <h1 className="text-3xl font-bold tracking-wide text-white uppercase sm:text-4xl lg:text-5xl">
             {profile.name}
           </h1>
-          {/*<p className="text-muted-foreground">{profile.title}</p>*/}
-        </div>
-
-        <p className="rise stagger-2 max-w-xl text-lg text-balance">
-          {profile.pitch}
-        </p>
-
-        <div className="rise stagger-3 flex gap-3 pt-2">
-          <Button
-            variant="outline"
-            className="transition-all duration-300 hover:-translate-y-0.5 hover:!bg-green-600 hover:!text-white hover:!border-green-600 hover:shadow-lg hover:shadow-green-600/25"
-            asChild
-          >
-            <a href={profile.github} target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-          </Button>
-          <Button
-            variant="outline"
-            className="transition-all duration-300 hover:-translate-y-0.5 hover:!bg-blue-600 hover:!text-white hover:!border-blue-600 hover:shadow-lg hover:shadow-blue-600/25"
-            asChild
-          >
-            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
-          </Button>
+          <p className="mx-auto mt-3 max-w-xl text-base text-balance text-white/75 sm:text-lg lg:max-w-2xl lg:text-xl">
+            {profile.pitch}
+          </p>
+          <div className="mt-6 flex justify-center gap-3">
+            <Button
+              variant="outline"
+              className="border-white/30 bg-white/5 text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:!bg-green-600 hover:!text-white hover:!border-green-600 hover:shadow-lg hover:shadow-green-600/25"
+              asChild
+            >
+              <a href={profile.github} target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              className="border-white/30 bg-white/5 text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:!bg-blue-600 hover:!text-white hover:!border-blue-600 hover:shadow-lg hover:shadow-blue-600/25"
+              asChild
+            >
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
 
-      <Separator className="appear stagger-4" />
-
+      <main className="relative mx-auto max-w-3xl px-6 py-16 space-y-16 lg:max-w-5xl lg:px-10 lg:py-24 lg:space-y-20 xl:max-w-6xl">
       {/* Skills */}
-      <section className="rise stagger-4 space-y-3">
+      <section id="skills" className="rise stagger-4 space-y-3">
         <div className="space-y-2">
           <span aria-hidden className="accent-bar" />
-          <h2 className="text-2xl font-semibold">My Developer skills</h2>
+          <h2 className="text-2xl font-semibold lg:text-3xl">Skills</h2>
         </div>
         <div className="flex flex-wrap justify-left gap-2">
           {profile.skills.map((skill, i) => (
@@ -171,23 +180,23 @@ export default function Home() {
       <Separator />
 
       {/* About */}
-      <section className="rise stagger-5 space-y-3">
+      <section id="whoami" className="rise stagger-5 space-y-3">
         <div className="space-y-2">
           <span aria-hidden className="accent-bar" />
-          <h2 className="text-2xl font-semibold">Who am I?</h2>
+          <h2 className="text-2xl font-semibold lg:text-3xl">Who am I?</h2>
         </div>
-        <p className="text-muted-foreground leading-relaxed">{profile.bio}</p>
+        <p className="text-base text-muted-foreground leading-relaxed lg:text-lg">{profile.bio}</p>
       </section>
 
       <Separator />
 
       {/* Projects */}
-      <section className="rise stagger-6 space-y-6">
+      <section id="projects" className="rise stagger-6 space-y-6">
         <div className="space-y-2">
           <span aria-hidden className="accent-bar" />
-          <h2 className="text-2xl font-semibold">Things I&apos;ve built</h2>
+          <h2 className="text-2xl font-semibold lg:text-3xl">Projects</h2>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
             <Link
               key={project.slug}
@@ -227,11 +236,11 @@ export default function Home() {
       <section className="rise stagger-6 space-y-6">
         <div className="space-y-2">
           <span aria-hidden className="accent-bar" />
-          <h2 className="text-2xl font-semibold">
+          <h2 className="text-2xl font-semibold lg:text-3xl">
             Other Skills &amp; Extracurricular Activities
           </h2>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {extracurriculars.map((item, i) => (
             <Card
               key={item.title}
@@ -276,12 +285,12 @@ export default function Home() {
 
       <Separator />
 
-      <section className="rise stagger-6 space-y-3">
+      <section id="contact" className="rise stagger-6 space-y-3">
         <div className="space-y-2">
           <span aria-hidden className="accent-bar" />
-          <h2 className="text-2xl font-semibold">Curious to know how I can cater your tech?</h2>
+          <h2 className="text-2xl font-semibold lg:text-3xl">Curious to know how I can cater your tech?</h2>
         </div>
-        <p className="text-muted-foreground leading-relaxed">{content.para1}</p>
+        <p className="text-base text-muted-foreground leading-relaxed lg:text-lg">{content.para1}</p>
         <Button
           className="sheen-sweep group transition-all duration-300 hover:-translate-y-0.5 hover:!bg-red-600 hover:!text-white hover:!border-red-600 hover:shadow-lg hover:shadow-red-600/30"
           asChild
@@ -292,6 +301,7 @@ export default function Home() {
           </a>
         </Button>
       </section>
-    </main>
+      </main>
+    </>
   );
 }
