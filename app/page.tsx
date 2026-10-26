@@ -106,8 +106,8 @@ export default function Home() {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent"
         />
         {/* Top nav */}
-        <nav className="rise absolute inset-x-0 top-0 z-10 flex w-full items-center justify-between bg-black/85 px-3 py-3 backdrop-blur-sm sm:px-6 sm:py-4">
-          <div className="flex flex-1 items-center justify-center gap-1 sm:gap-8">
+        <nav className="rise absolute inset-x-0 top-0 z-10 flex w-full items-center bg-black/85 px-3 py-3 backdrop-blur-sm sm:px-6 sm:py-4">
+          <div className="flex items-center gap-1 sm:gap-8">
             {[
               { label: "Skills", href: "#skills" },
               { label: "Projects", href: "#projects" },
@@ -123,8 +123,6 @@ export default function Home() {
               </a>
             ))}
           </div>
-          {/* Spacer matching the fixed theme-toggle's footprint so the links stay centered */}
-          <span aria-hidden className="w-16 shrink-0" />
         </nav>
 
         {/* Name + pitch */}
