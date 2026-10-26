@@ -106,8 +106,8 @@ export default function Home() {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent"
         />
         {/* Top nav */}
-        <nav className="rise absolute inset-x-0 top-0 z-10 hidden w-full items-center justify-center bg-black/85 backdrop-blur-sm sm:flex">
-          <div className="flex items-center gap-8 px-4 py-4">
+        <nav className="rise absolute inset-x-0 top-0 z-10 flex w-full items-center justify-center bg-black/85 pr-16 backdrop-blur-sm sm:pr-20">
+          <div className="flex items-center gap-1 px-2 py-3 sm:gap-8 sm:px-4 sm:py-4">
             {[
               { label: "Skills", href: "#skills" },
               { label: "Projects", href: "#projects" },
@@ -117,7 +117,7 @@ export default function Home() {
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-full px-3 py-1.5 text-sm font-bold text-white/80 transition-colors hover:bg-white/15 hover:text-white"
+                className="rounded-full px-2 py-1.5 text-xs font-bold text-white/80 transition-colors hover:bg-white/15 hover:text-white sm:px-3 sm:text-sm"
               >
                 {item.label}
               </a>
