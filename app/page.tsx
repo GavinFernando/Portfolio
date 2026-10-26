@@ -19,7 +19,7 @@ const profile = {
   name: "Gavin Fernando",
   //title: "Web-App Developer | Cybersecurity MSc | HCI inspired",
   pitch:
-    "I build clean, usable interfaces — with a security-aware mindset from my cybersecurity background.",
+    "I build clean, usable interfaces with a security-aware mindset from my cybersecurity background.",
   bio: "A versatile Web-App, UI Designer skilled in building secure platforms with an interest of HCI. Currently enrolled as a Cybersecurity Masters student at Universität des Saarlandes",
   avatarUrl: "/profile_pic.png",
   initials: "GF",
