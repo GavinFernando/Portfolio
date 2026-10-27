@@ -140,7 +140,9 @@
     --glow-strength: 0.28;
     --wash-strength: 10%;
 
-    --topic-accent: #66dbc8;    /* main topics: Skills, Who am I, Projects, Contact */
+    /* darker/more saturated teal than the raw brand color so it stays
+       readable on white; dark mode brightens it back up below */
+    --topic-accent: #0e7d6e;    /* main topics: Skills, Who am I, Projects, Contact */
     --subtopic-accent: #0b3954; /* subtopics: project names, extracurricular titles */
 }
 
@@ -151,9 +153,10 @@
     --glow-strength: 0.4;
     --wash-strength: 16%;
 
-    /* lighter than the light-mode navy so it stays legible on dark cards,
-       while still reading noticeably darker/more muted than --topic-accent */
-    --subtopic-accent: #3f7ea3;
+    /* brand teal reads fine at full brightness against black */
+    --topic-accent: #66dbc8;
+    /* lighter than the light-mode navy so it stays legible on dark cards */
+    --subtopic-accent: #7eb6d9;
 }
 
 /* ---------- keyframes ---------- */

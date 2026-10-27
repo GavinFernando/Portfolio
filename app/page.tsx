@@ -66,6 +66,15 @@ const extracurriculars: ExtracurricularItem[] = [
     description: "Public music profile on Instagram.",
     links: [
       { label: "@wherehesing", href: "https://www.instagram.com/wherehesing/?hl=en" },
+      { label: "Djing", href: "https://youtu.be/MX0nqKhscbY?si=Fw0sry7sIRW0dk5P" },
+      { label: "Music productions", href: "https://youtu.be/DF7IhBo-_oI?si=YVlNb33FKv0uP2QO" },
+      { label: "Music productions", href: "https://youtu.be/zUU3A9WbHao?si=ZPoeYgfUhBRu_VS9" },
+      { label: "Music productions", href: "https://youtu.be/zUU3A9WbHao?si=XhQ6PBRFjEAcPPWQ" },
+      { label: "Live music performance", href: "https://youtube.com/shorts/dZShaVXMdt4?si=QbRz2ymBzOwbaRGI" },
+      {
+        label: "Live music performance",
+        href: "https://www.instagram.com/reel/DEqUtYfzMDn/?utm_source=ig_web_copy_link&rpxt=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+      },
     ],
   },
   {
@@ -159,7 +168,7 @@ export default function Home() {
       <main className="relative mx-auto max-w-3xl px-6 py-16 space-y-16 lg:max-w-5xl lg:px-10 lg:py-24 lg:space-y-20 xl:max-w-6xl">
       {/* Skills */}
       <section id="skills" className="rise stagger-4 space-y-3">
-        <h2 className="text-2xl font-semibold text-[#66dbc8] lg:text-3xl">Skills</h2>
+        <h2 className="text-2xl font-semibold text-[var(--topic-accent)] lg:text-3xl">Skills</h2>
         <div className="flex flex-wrap justify-left gap-2">
           {profile.skills.map((skill, i) => (
             <Badge
@@ -178,7 +187,7 @@ export default function Home() {
 
       {/* About */}
       <section id="whoami" className="rise stagger-5 space-y-3">
-        <h2 className="text-2xl font-semibold text-[#66dbc8] lg:text-3xl">Who am I?</h2>
+        <h2 className="text-2xl font-semibold text-[var(--topic-accent)] lg:text-3xl">Who am I?</h2>
         <p className="text-base text-muted-foreground leading-relaxed lg:text-lg">{profile.bio}</p>
       </section>
 
@@ -186,14 +195,14 @@ export default function Home() {
 
       {/* Projects */}
       <section id="projects" className="rise stagger-6 space-y-6">
-        <h2 className="text-2xl font-semibold text-[#66dbc8] lg:text-3xl">Projects</h2>
+        <h2 className="text-2xl font-semibold text-[var(--topic-accent)] lg:text-3xl">Projects</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
             <Link
               key={project.slug}
               href={`/projects/${project.slug}`}
               aria-label={`${project.title} — ${project.description}`}
-              className="pop group block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#66dbc8] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="pop group block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--topic-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               style={{ animationDelay: `${0.45 + i * 0.09}s` }}
             >
               <Card className="relative h-full transition-all duration-300 ease-out group-hover:-translate-y-1.5 group-hover:shadow-xl group-hover:shadow-foreground/10 group-hover:ring-foreground/25">
@@ -225,7 +234,7 @@ export default function Home() {
 
       {/* Other skills & extracurricular activities */}
       <section className="rise stagger-6 space-y-6">
-        <h2 className="text-2xl font-semibold text-[#66dbc8] lg:text-3xl">
+        <h2 className="text-2xl font-semibold text-[var(--topic-accent)] lg:text-3xl">
           Other Skills &amp; Extracurricular Activities
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -235,8 +244,12 @@ export default function Home() {
               className="pop h-full"
               style={{ animationDelay: `${0.45 + i * 0.09}s` }}
             >
+              <CardHeader>
+                <CardTitle className="text-[var(--subtopic-accent)]">{item.title}</CardTitle>
+                <CardDescription>{item.description}</CardDescription>
+              </CardHeader>
               {item.image && (
-                <div className="relative mx-6 mt-6 overflow-hidden rounded-lg">
+                <div className="relative mx-6 overflow-hidden rounded-lg">
                   <Image
                     src={item.image.src}
                     alt={item.image.alt}
@@ -246,10 +259,6 @@ export default function Home() {
                   />
                 </div>
               )}
-              <CardHeader>
-                <CardTitle className="text-[var(--subtopic-accent)]">{item.title}</CardTitle>
-                <CardDescription>{item.description}</CardDescription>
-              </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
                 {item.links.map((link, j) => (
                   <Button
@@ -274,7 +283,7 @@ export default function Home() {
       <Separator />
 
       <section id="contact" className="rise stagger-6 space-y-3">
-        <h2 className="text-2xl font-semibold text-[#66dbc8] lg:text-3xl">Curious to know how I can cater your tech?</h2>
+        <h2 className="text-2xl font-semibold text-[var(--topic-accent)] lg:text-3xl">Curious to know how I can cater your tech?</h2>
         <p className="text-base text-muted-foreground leading-relaxed lg:text-lg">{content.para1}</p>
         <Button
           className="sheen-sweep group transition-all duration-300 hover:-translate-y-0.5 hover:!bg-red-600 hover:!text-white hover:!border-red-600 hover:shadow-lg hover:shadow-red-600/30"
