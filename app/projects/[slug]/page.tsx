@@ -1,12 +1,12 @@
 // src/app/projects/[slug]/page.tsx
 
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { ProjectGallery } from "@/components/project-gallery";
 import { cn } from "@/lib/utils";
 import {
   getProjectBySlug,
@@ -41,7 +41,7 @@ function RichText({ text }: { text: string }) {
                 >
                   <span
                     aria-hidden
-                    className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--accent-2)]"
+                    className="mt-2 size-1.5 shrink-0 rounded-full bg-[#66dbc8]"
                   />
                   <span>{l.trimStart().slice(2)}</span>
                 </li>
@@ -83,11 +83,11 @@ export default async function ProjectPage({
         className="rise group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="size-3.5 transition-transform duration-300 group-hover:-translate-x-1" />
-        <span className="link-sweep">Back to home</span>
+        <span>Back to home</span>
       </Link>
 
       <section className="space-y-4">
-        <h1 className="rise stagger-1 gradient-text text-4xl font-bold tracking-tight lg:text-5xl">
+        <h1 className="rise stagger-1 text-4xl font-bold tracking-tight text-[var(--subtopic-accent)] lg:text-5xl">
           {project.title}
         </h1>
 
@@ -102,7 +102,7 @@ export default async function ProjectPage({
             <Badge
               key={tag}
               variant="outline"
-              className="pop cursor-default transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-2)] hover:text-[var(--accent-2)]"
+              className="pop cursor-default transition-all duration-200 hover:-translate-y-0.5 hover:border-[#66dbc8] hover:text-[#66dbc8]"
               style={{ animationDelay: `${0.18 + i * 0.045}s` }}
             >
               {tag}
@@ -137,10 +137,7 @@ export default async function ProjectPage({
           {project.sections.map((sec) => (
             <section key={sec.heading} className="space-y-3">
               <Separator />
-              <div className="space-y-2 pt-3">
-                <span aria-hidden className="accent-bar" />
-                <h2 className="text-xl font-semibold">{sec.heading}</h2>
-              </div>
+              <h2 className="pt-3 text-xl font-semibold text-[#66dbc8]">{sec.heading}</h2>
               <RichText text={sec.body} />
             </section>
           ))}
@@ -152,10 +149,7 @@ export default async function ProjectPage({
         <>
           <Separator />
           <section className="space-y-3">
-            <div className="space-y-2">
-              <span aria-hidden className="accent-bar" />
-              <h2 className="text-xl font-semibold">Demo</h2>
-            </div>
+            <h2 className="text-xl font-semibold text-[#66dbc8]">Demo</h2>
             <div
               className={cn(
                 "grid gap-4",
@@ -194,53 +188,8 @@ export default async function ProjectPage({
         <>
           <Separator />
           <section className="space-y-4">
-            <div className="space-y-2">
-              <span aria-hidden className="accent-bar" />
-              <h2 className="text-xl font-semibold">Gallery</h2>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2">
-              {images.map((img, i) => (
-                <figure
-                  key={img.src}
-                  className={cn(
-                    "pop group/img space-y-2",
-                    img.wide && "sm:col-span-2"
-                  )}
-                  style={{ animationDelay: `${Math.min(i, 8) * 0.07}s` }}
-                >
-                  <div className="overflow-hidden rounded-xl bg-muted ring-1 ring-foreground/10 transition-all duration-300 group-hover/img:-translate-y-1 group-hover/img:shadow-xl group-hover/img:shadow-foreground/10 group-hover/img:ring-[var(--accent-2)]/40">
-                    {img.width && img.height ? (
-                      <Image
-                        src={img.src}
-                        alt={img.caption ?? `${project.title} screenshot ${i + 1}`}
-                        width={img.width}
-                        height={img.height}
-                        sizes="(max-width: 768px) 100vw, 768px"
-                        className="h-auto w-full transition-transform duration-500 ease-out group-hover/img:scale-[1.03]"
-                      />
-                    ) : (
-                      <div className="relative aspect-video w-full">
-                        <Image
-                          src={img.src}
-                          alt={
-                            img.caption ??
-                            `${project.title} screenshot ${i + 1}`
-                          }
-                          fill
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                          className="object-cover transition-transform duration-500 ease-out group-hover/img:scale-[1.03]"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  {img.caption && (
-                    <figcaption className="text-xs text-muted-foreground transition-colors duration-300 group-hover/img:text-foreground">
-                      {img.caption}
-                    </figcaption>
-                  )}
-                </figure>
-              ))}
-            </div>
+            <h2 className="text-xl font-semibold text-[#66dbc8]">Gallery</h2>
+            <ProjectGallery images={images} projectTitle={project.title} />
           </section>
         </>
       )}

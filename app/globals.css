@@ -139,6 +139,9 @@
     --accent-3: oklch(0.72 0.18 45);  /* amber   */
     --glow-strength: 0.28;
     --wash-strength: 10%;
+
+    --topic-accent: #66dbc8;    /* main topics: Skills, Who am I, Projects, Contact */
+    --subtopic-accent: #0b3954; /* subtopics: project names, extracurricular titles */
 }
 
 .dark {
@@ -147,6 +150,10 @@
     --accent-3: oklch(0.80 0.16 55);
     --glow-strength: 0.4;
     --wash-strength: 16%;
+
+    /* lighter than the light-mode navy so it stays legible on dark cards,
+       while still reading noticeably darker/more muted than --topic-accent */
+    --subtopic-accent: #3f7ea3;
 }
 
 /* ---------- keyframes ---------- */
@@ -164,10 +171,6 @@
 @keyframes pop {
     from { opacity: 0; transform: scale(0.9) translateY(6px); }
     to   { opacity: 1; transform: none; }
-}
-
-@keyframes pan {
-    to { background-position: 300% center; }
 }
 
 @keyframes drift {
@@ -198,24 +201,6 @@
 .stagger-5 { animation-delay: 0.32s; }
 .stagger-6 { animation-delay: 0.40s; }
 
-/* ---------- gradient text ---------- */
-
-.gradient-text {
-    background-image: linear-gradient(
-        100deg,
-        var(--accent-1),
-        var(--accent-2),
-        var(--accent-3),
-        var(--accent-2),
-        var(--accent-1)
-    );
-    background-size: 300% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: pan 9s linear infinite;
-}
-
 /* ---------- aurora glow (behind the avatar) ---------- */
 
 /* Opacity is intentionally left to Tailwind utilities at each call site —
@@ -233,78 +218,6 @@
 }
 
 .bobbing { animation: bob 5s ease-in-out infinite; }
-
-/* ---------- animated accent rule under headings ---------- */
-
-.accent-bar {
-    display: block;
-    height: 3px;
-    width: 2.25rem;
-    border-radius: 9999px;
-    background-image: linear-gradient(
-        90deg,
-        var(--accent-1),
-        var(--accent-2),
-        var(--accent-3)
-    );
-    background-size: 200% auto;
-    animation: pan 6s linear infinite;
-    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-section:hover > .accent-bar,
-section:hover .accent-bar {
-    width: 4.5rem;
-}
-
-/* ---------- interactive card ---------- */
-
-/* `isolation` keeps the z-index:-1 layers above the card background
-   but underneath the card's text content. */
-.glow-card { isolation: isolate; }
-
-.glow-card::before,
-.glow-card::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-/* diagonal colour wash */
-.glow-card::before {
-    inset: 0;
-    border-radius: inherit;
-    background-image: linear-gradient(
-        135deg,
-        color-mix(in oklch, var(--accent-1) var(--wash-strength), transparent),
-        transparent 50%,
-        color-mix(in oklch, var(--accent-2) var(--wash-strength), transparent)
-    );
-}
-
-/* top hairline */
-.glow-card::after {
-    inset-inline: 0;
-    top: 0;
-    height: 2px;
-    background-image: linear-gradient(
-        90deg,
-        transparent,
-        var(--accent-1),
-        var(--accent-2),
-        transparent
-    );
-}
-
-.group:hover .glow-card::before,
-.group:focus-visible .glow-card::before,
-.group:hover .glow-card::after,
-.group:focus-visible .glow-card::after {
-    opacity: 1;
-}
 
 /* ---------- sweeping highlight on call-to-action buttons ----------
    NOTE: do not name this `.sheen-sweep` — shadcn/tailwind.css already
@@ -336,32 +249,6 @@ section:hover .accent-bar {
 
 .sheen-sweep:hover::after {
     animation: sheen 0.85s ease-out;
-}
-
-/* ---------- underline that grows in from the left ---------- */
-
-.link-sweep {
-    position: relative;
-}
-
-.link-sweep::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    height: 1.5px;
-    width: 100%;
-    border-radius: 9999px;
-    background-image: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.link-sweep:hover::after,
-.link-sweep:focus-visible::after,
-.group:hover .link-sweep::after {
-    transform: scaleX(1);
 }
 
 /* ---------- respect reduced-motion preferences ---------- */
