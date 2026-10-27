@@ -110,8 +110,8 @@ export default function Home() {
           <div className="flex items-center gap-1 sm:gap-8">
             {[
               { label: "Skills", href: "#skills" },
-              { label: "Projects", href: "#projects" },
               { label: "Who am I", href: "#whoami" },
+              { label: "Projects", href: "#projects" },
               { label: "Contact", href: "#contact" },
             ].map((item) => (
               <a
